@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
@@ -47,6 +49,23 @@ public class PostServiceImpl implements PostService {
         }
 
         return postDtoList;
+    }
+
+
+
+    @Override
+    public List<PostDto> getPostById(Long userId) {
+        List<Post> allPostsById = postRepo.findByUserId(userId);
+        List<PostDto> postDtoListById = new ArrayList<>();
+
+        if (!allPostsById.isEmpty()) {
+            for (Post post : allPostsById) {
+                PostDto postDto = modelMapper.map(post, PostDto.class);
+                postDtoListById.add(postDto);
+            }
+        }
+
+        return postDtoListById;
     }
 
 }
