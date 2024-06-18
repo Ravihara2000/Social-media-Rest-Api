@@ -1,6 +1,7 @@
 package com.SocialMedia.social_media_backend.controller;
 
 import com.SocialMedia.social_media_backend.dto.PostDto;
+import com.SocialMedia.social_media_backend.dto.PostWithCommentDto;
 import com.SocialMedia.social_media_backend.entity.Post;
 import com.SocialMedia.social_media_backend.service.PostService;
 import org.modelmapper.ModelMapper;
@@ -38,5 +39,11 @@ public class PostController {
     public List<PostDto> getAllPostById(@RequestParam(value = "id")long postId){
         List<PostDto> allPostById = postService.getPostById(postId);
         return allPostById;
+    }
+
+    @GetMapping("/{postId}/comments")
+    public ResponseEntity<PostWithCommentDto> getPostWithComment(@PathVariable Long postId){
+        PostWithCommentDto postWithCommentDto= postService.getPostWithComment(postId);
+        return ResponseEntity.ok(postWithCommentDto);
     }
 }

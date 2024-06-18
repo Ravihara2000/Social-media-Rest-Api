@@ -1,6 +1,8 @@
 package com.SocialMedia.social_media_backend.service.impl;
 
+import com.SocialMedia.social_media_backend.dto.CommentDto;
 import com.SocialMedia.social_media_backend.dto.PostDto;
+import com.SocialMedia.social_media_backend.dto.PostWithCommentDto;
 import com.SocialMedia.social_media_backend.dto.UserDto;
 import com.SocialMedia.social_media_backend.entity.Post;
 import com.SocialMedia.social_media_backend.entity.User;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -66,6 +69,19 @@ public class PostServiceImpl implements PostService {
         }
 
         return postDtoListById;
+    }
+
+    @Override
+    public PostWithCommentDto getPostWithComment(Long postId) {
+        Post post = postRepo.findById(postId).orElseThrow(()->new RuntimeException("Post not found"));
+
+        PostWithCommentDto postWithCommentDto=modelMapper.map(post,PostWithCommentDto.class);
+        List<CommentDto> commentDtos=post.getComments().stream()
+                .map(comment -> modelMapper.map(comment, CommentDto.class))
+                .collect(Collectors.toList());
+        postWithCommentDto.setComments(commentDtos);
+
+        return postWithCommentDto;
     }
 
 }
