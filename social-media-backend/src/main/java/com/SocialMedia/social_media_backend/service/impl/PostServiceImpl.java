@@ -98,6 +98,16 @@ public class PostServiceImpl implements PostService {
         }
     }
 
+    @Override
+    public String deletePost(Long postId) {
+        if(postRepo.existsById(postId)){
+            postRepo.deleteById(postId);
+            return "deleted successfully";
+        }else {
+            throw new RuntimeException("no id found");
+        }
     }
+
+}
 
 

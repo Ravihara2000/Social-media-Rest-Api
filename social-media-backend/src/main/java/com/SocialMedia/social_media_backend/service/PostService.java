@@ -19,4 +19,6 @@ public interface PostService {
     PostWithCommentDto getPostWithComment(Long postId);
 
     PostUpdateDto updatePost(PostUpdateDto postUpdateDto);
+
+    String deletePost(Long postId);
 }
