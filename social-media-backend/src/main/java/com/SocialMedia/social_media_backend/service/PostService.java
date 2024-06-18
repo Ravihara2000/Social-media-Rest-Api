@@ -2,6 +2,7 @@ package com.SocialMedia.social_media_backend.service;
 
 import com.SocialMedia.social_media_backend.dto.PostDto;
 import com.SocialMedia.social_media_backend.dto.PostWithCommentDto;
+import com.SocialMedia.social_media_backend.dto.request.PostUpdateDto;
 import com.SocialMedia.social_media_backend.entity.Post;
 import com.SocialMedia.social_media_backend.entity.User;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,6 @@ public interface PostService {
     List<PostDto> getPostById(Long postId);
 
     PostWithCommentDto getPostWithComment(Long postId);
+
+    PostUpdateDto updatePost(PostUpdateDto postUpdateDto);
 }

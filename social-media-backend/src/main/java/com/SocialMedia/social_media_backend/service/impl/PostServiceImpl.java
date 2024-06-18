@@ -4,6 +4,7 @@ import com.SocialMedia.social_media_backend.dto.CommentDto;
 import com.SocialMedia.social_media_backend.dto.PostDto;
 import com.SocialMedia.social_media_backend.dto.PostWithCommentDto;
 import com.SocialMedia.social_media_backend.dto.UserDto;
+import com.SocialMedia.social_media_backend.dto.request.PostUpdateDto;
 import com.SocialMedia.social_media_backend.entity.Post;
 import com.SocialMedia.social_media_backend.entity.User;
 import com.SocialMedia.social_media_backend.repository.PostRepo;
@@ -84,5 +85,19 @@ public class PostServiceImpl implements PostService {
         return postWithCommentDto;
     }
 
-}
+    @Override
+    public PostUpdateDto updatePost(PostUpdateDto postUpdateDto) {
+        if(postRepo.existsById(postUpdateDto.getPostId())){
+            Post post = postRepo.getReferenceById(postUpdateDto.getPostId());
+            post.setContent(postUpdateDto.getContent());
+
+            postRepo.save(post);
+            return postUpdateDto;
+        }else {
+            throw new RuntimeException();
+        }
+    }
+
+    }
+
 

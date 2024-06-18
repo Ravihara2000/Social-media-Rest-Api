@@ -2,6 +2,7 @@ package com.SocialMedia.social_media_backend.controller;
 
 import com.SocialMedia.social_media_backend.dto.PostDto;
 import com.SocialMedia.social_media_backend.dto.PostWithCommentDto;
+import com.SocialMedia.social_media_backend.dto.request.PostUpdateDto;
 import com.SocialMedia.social_media_backend.entity.Post;
 import com.SocialMedia.social_media_backend.service.PostService;
 import org.modelmapper.ModelMapper;
@@ -45,5 +46,11 @@ public class PostController {
     public ResponseEntity<PostWithCommentDto> getPostWithComment(@PathVariable Long postId){
         PostWithCommentDto postWithCommentDto= postService.getPostWithComment(postId);
         return ResponseEntity.ok(postWithCommentDto);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<PostUpdateDto> updatePost(@RequestBody PostUpdateDto postUpdateDto){
+        PostUpdateDto postUpdateDto1=postService.updatePost(postUpdateDto);
+        return ResponseEntity.ok(postUpdateDto1);
     }
 }
