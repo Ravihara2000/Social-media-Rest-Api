@@ -1,30 +1,18 @@
 package com.SocialMedia.social_media_backend.dto;
 
-import com.SocialMedia.social_media_backend.entity.Post;
-import com.SocialMedia.social_media_backend.entity.User;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import java.sql.Timestamp;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommentDto {
-    private long id;
-
-
     private String content;
 
-
-    private Timestamp createdAt;
-
-
-    private Timestamp updatedAt;
+    private Long postId;
 
 
-    private Post post;
-
-
-    private User user;
+    private Long userId;
 }

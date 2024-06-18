@@ -27,7 +27,7 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private UserRepo userRepo;
 
-
+    @Override
     public Post createPost(Long userId, String content) {
         User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Post post = new Post();
